@@ -13,6 +13,8 @@ h1
 }
 #agregar-particula
 {
+   margin-top: 20px;
+   margin-bottom: 20px;
    padding: 4px 4px 30px 20px; 
    background-color: whitesmoke;
    border-radius:5px;
@@ -46,5 +48,10 @@ select:invalid
 #agregar-particula-btn
 {
     margin-top: 2em;
+}
+
+body>h4
+{
+    margin-left: 10px;
 }
 
