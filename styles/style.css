@@ -11,7 +11,7 @@ h1
     margin-bottom: 20px;
     text-align: center;
 }
-#agregar-particula
+#agregar-particula, .container
 {
    margin-top: 20px;
    margin-bottom: 20px;
@@ -50,8 +50,28 @@ select:invalid
     margin-top: 2em;
 }
 
-body>h4
+body>h4,h5
 {
     margin-left: 10px;
+    margin-top: 5px;
 }
 
+#resultado
+{
+    width:80%;
+    height: 100px;
+    
+}
+#particula-actual
+{
+   position: relative;
+   top:25px;
+   color: rgb(64, 143, 247);
+
+}
+
+
+tr.active 
+{
+    background-color: rgb(184, 184, 253);
+}

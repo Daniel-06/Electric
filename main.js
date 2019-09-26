@@ -1,6 +1,9 @@
 
 var particulas = [];
 var prefijos = {};
+var indexParticulaActual = -1;
+
+var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
 
 prefijos['tera'] = 1e12;
 prefijos['giga'] = 1e9;
@@ -19,7 +22,6 @@ prefijos['pico'] = 1e-12;
 var TextChanged = function (e)
 {
     let input = this;
-    console.log(!isNaN(input.value));
     
     if (input.value !== '' && !isNaN(input.value))
     {
@@ -30,6 +32,8 @@ var TextChanged = function (e)
 }
 
 // Declare input and outpu DOM Elements
+
+var headingParticulaActual = document.getElementById("particula-actual");
 
 var selectPrefijo = document.getElementById("select-prefijo");
 
@@ -51,21 +55,47 @@ var inputPosicionZ = document.getElementById("posicion-z");
 
 var agregarParticulaInputs = [inputPosicionX,inputPosicionY,inputPosicionZ,inputCarga];
 
-function AgregarParticula()
+
+$("#tabla-particulas").on('click','.clickable-row',
+function(event){
+    indexParticulaActual = Number(this.firstChild.textContent) - 1;
+
+    let particula = particulas[indexParticulaActual];
+
+    headingParticulaActual.innerHTML = "P" + String(indexParticulaActual+1) +
+    "&nbsp;&nbsp;Posición:  " + `(${particula.x},${particula.y},${particula.z})` + 
+    "&nbsp;&nbsp;Carga: " + particula.charge + " C";
+
+    $(this).addClass('active').siblings().removeClass('active');
+});
+
+for (let i = 0; i < particulasPrueba.length; i++) {
+    const element = particulasPrueba[i];
+    AgregarParticula(element);
+}
+
+function getParticulaFromInput()
 {
-    
+    if (!ParametrosValidos())
+    {
+        return null;
+    }
 
     let pX = Number(inputPosicionX.value);
     let pY = Number(inputPosicionY.value);
     let pZ = Number(inputPosicionZ.value);
 
+    let carga = Number(inputCarga.value);
+
     let prefijo = selectPrefijo.options[selectPrefijo.selectedIndex].value;
     let prefijoVal = prefijos[prefijo];
 
+    return new Particle(pX,pY,pZ,carga);
 
-    
-    let carga = inputCarga.value * prefijoVal;
-    
+}
+
+function ParametrosValidos()
+{
     let ParametrosValidos = true;
 
     for (let i = 0; i < agregarParticulaInputs.length; i++) 
@@ -81,15 +111,17 @@ function AgregarParticula()
         
         
     }
+  
+    return ParametrosValidos;
+}
 
-    if(!ParametrosValidos)
-    {
+function AgregarParticula(particula)
+{
+    if(particula == null)
+    {        
         return;
     }
 
-
-    let particula = new Particle(pX,pY,pZ,carga);
-    
     particulas.push(particula);
 
 
@@ -100,15 +132,17 @@ function AgregarParticula()
     tdNumero.textContent= particulas.length;
 
     let tdCarga = document.createElement("td");
-    tdCarga.textContent = carga + " C";
+    tdCarga.textContent = String(particula.charge) + " C";
 
     let tdPosicion = document.createElement("td");
-    tdPosicion.textContent = `(${pX},${pY},${pZ})`;
+    tdPosicion.textContent = `(${particula.x},${particula.y},${particula.z})`;
 
 
     row.appendChild(tdNumero);
     row.appendChild(tdCarga);
     row.appendChild(tdPosicion);
+
+    row.classList.add('clickable-row');
 
     tbody.appendChild(row);
 }

@@ -3,12 +3,14 @@
 <html>  
 
     <head>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Campo Electrico Simulacion</title>
         <link rel="icon" href="img/light.png">
         <style> body {padding: 0; margin: 0;} </style>
         <script src="Electric.js"></script>
+        <script src="js/jquery-3.4.1.min.js"></script>
         
         <link rel="stylesheet" href="styles/bootstrap.min.css">
         <link rel="stylesheet" href="styles/style.css">
@@ -108,7 +110,7 @@
 
                                 <div class="col-2">
                                     
-                                    <button type="button" class="btn btn-md btn-secondary" onclick="AgregarParticula()" id="agregar-particula-btn">
+                                    <button type="button" class="btn btn-md btn-secondary" onclick="AgregarParticula(getParticulaFromInput())" id="agregar-particula-btn">
                                         <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
                                         Agregar
                                     </button>
@@ -121,6 +123,11 @@
                 
                         </form>
                         
+            </div>
+
+            
+            <div class="container" id="resultado">
+                <h5 id="particula-actual">Seleccione una partícula</h5>
             </div>
 
             <h4>Particulas:</h4>
