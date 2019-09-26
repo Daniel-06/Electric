@@ -29,6 +29,10 @@ var TextChanged = function (e)
 
 }
 
+// Declare input and outpu DOM Elements
+
+var selectPrefijo = document.getElementById("select-prefijo");
+
 var tablaParticulas = document.getElementById("tabla-particulas");
 
 var tbody = tablaParticulas.getElementsByTagName("tbody")[0];
@@ -55,7 +59,6 @@ function AgregarParticula()
     let pY = Number(inputPosicionY.value);
     let pZ = Number(inputPosicionZ.value);
 
-    let selectPrefijo = document.getElementById("select-prefijo");
     let prefijo = selectPrefijo.options[selectPrefijo.selectedIndex].value;
     let prefijoVal = prefijos[prefijo];
 
