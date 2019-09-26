@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>  
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Campo Electrico Simulacion</title>
+        <link rel="icon" href="img/light.png">
+        <style> body {padding: 0; margin: 0;} </style>
+        <script src="Electric.js"></script>
+        
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+        
+    </head>
+    
+    <body>
+        <h1>Ley de Coulomb</h1>
+            <div class="container-fluid" id="form">   
+                    <form id= "" action="">
+
+                        <fieldset class="col" id="agregar-particula">  
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="carga">Carga:</label>
+                                    <div class="form-row">
+
+                                        <div class="col">
+                                             <input class="form-control"  type="text" name="carga" id="carga">
+                                             <div class="invalid-feedback">
+                                                Ingrese  un numero valido.
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                            <select name="prefijo" id="select-prefijo" class="form-control form-control-md" placeholder="eeee">
+                                                <option value="none" selected disabled hidden>Seleccione Prefijo</option>
+                                                <option value="tera">T</option>
+                                                <option value="giga">G</option>
+                                                <option value="mega">M</option>
+                                                <option value="kilo">k</option>
+                                                <option value="hecto">h</option>
+                                                <option value="deca">da</option>
+                                                <option value="none">Ninguno</option>
+                                                <option value="deci">d</option>
+                                                <option value="centi">c</option>
+                                                <option value="mili">m</option>
+                                                <option value="micro">μ</option>
+                                                <option value="nano">n</option>
+                                                <option value="pico">p</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                   
+                                    
+                                </div>
+
+                                <div class="col" id="div-posicion">
+
+                                    <label for="posicion">Posición:</label>
+                                    <div class="form-row">
+                                        <div class="col">
+
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">X</div>
+                                                </div>
+                                                <input class="form-control" type="text"  name="posicionX" id="posicion-x">
+                                                <div class="invalid-feedback">
+                                                    Ingrese  un numero valido.
+                                                </div>
+                                            </div>
+                                               
+                                        </div>
+        
+                                        <div class="col">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">Y</div>
+                                                    </div>
+                                                    <input class="form-control" type="text"  name="posicionY" id="posicion-y">
+                                                    <div class="invalid-feedback">
+                                                        Ingrese  un numero valido.
+                                                    </div>
+                                                </div>
+                                        </div>
+    
+                                        <div class="col">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">Z</div>
+                                                    </div>
+                                                    <input class="form-control" type="text"  name="posicionZ" id="posicion-z">
+                                                    <div class="invalid-feedback">
+                                                        Ingrese  un numero valido.
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                            
+                                </div>
+
+                                <div class="col-2">
+                                    
+                                    <button type="button" class="btn btn-md btn-secondary" onclick="AgregarParticula()" id="agregar-particula-btn">
+                                        <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        Agregar
+                                    </button>
+                                </div>
+                            </div>
+                          
+                        </fieldset>
+
+                        
+                
+                        </form>
+                        
+            </div>
+
+            <div class="">
+                <table class="table" id="tabla-particulas">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Carga</th>
+                            <th scope="col">Posición</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+       
+        
+             <script src="main.js"></script>
+    </body>
+
+</html>

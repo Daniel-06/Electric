@@ -1,0 +1,50 @@
+
+body
+{
+    background-color: #e6ecf0;
+}
+
+h1
+{
+    margin-left:10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+#agregar-particula
+{
+   padding: 4px 4px 30px 20px; 
+   background-color: whitesmoke;
+   border-radius:5px;
+   border: 1px solid darkgrey;
+}
+
+#div-posicion
+{
+    margin-left:80px;
+}
+
+#tabla-particulas
+{
+    margin-top:20px;
+    background-color: white;
+
+}
+
+select
+{
+    text-align-last:center;  
+}
+
+select:invalid 
+{ 
+    color: gray; 
+}
+
+
+
+#agregar-particula-btn
+{
+    margin-top: 2em;
+}
+
