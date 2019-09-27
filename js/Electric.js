@@ -52,7 +52,7 @@ Vector.dist = function (v1,v2)
     return v;
 }
 
-Vector.getAngle = function(v)
+Vector.getAngle2D = function(v)
 {
    return Math.atan(v.y/v.x) * 180/Math.PI;
 }
@@ -86,6 +86,54 @@ Vector.prototype.mult = function(number)
     this.x *= number;
     this.y *= number;
     this.z *= number;
+}
+
+// Returns a string  in unit vector form (1i + 2j + 0k)
+Vector.prototype.formatUnitVector = function()
+{
+    let strVector = "(";
+    
+
+    if (this.x>=0)
+    {
+        strVector+= this.x + "î ";
+    }
+
+    else
+    {
+        strVector+="−" + this.x*-1 + "î ";
+    }
+
+
+
+
+    if (this.y>=0)
+    {
+        strVector+="+ " + this.y + "ĵ ";
+    }
+
+    else
+    {
+        strVector+="− " + this.y*-1 + "ĵ ";
+    }
+
+
+
+
+    if (this.z>=0)
+    {
+        strVector += "+ " + this.z + "k̂";
+    }
+
+    else
+    {
+        strVector +="− " + this.z*-1 + "k̂";
+    }
+
+
+    strVector += ")";
+
+    return strVector;
 }
 
 

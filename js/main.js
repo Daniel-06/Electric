@@ -4,8 +4,12 @@ var prefijos = {};
 var indexParticulaActual = -1;
 
 // var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
-var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
-    new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
+
+// var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
+//     new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
+
+var particulasPrueba =[ new Particle(0,0,0,0.000003),new Particle(0,0.6,0,0.000005),
+    new Particle(0.8,0.6,0,0.000007),new Particle(0.8,0,0,-0.000004)];
 
 prefijos['tera'] = 1e12;
 prefijos['giga'] = 1e9;
@@ -37,6 +41,8 @@ var TextChanged = function (e)
 
 var headingParticulaActual = document.getElementById("particula-actual");
 
+var headingResultado = document.getElementById("heading-fuerza-neta");
+
 var selectPrefijo = document.getElementById("select-prefijo");
 
 var tablaParticulas = document.getElementById("tabla-particulas");
@@ -64,11 +70,14 @@ function(event){
     indexParticulaActual = Number(this.firstChild.textContent) - 1;
 
     let particula = particulas[indexParticulaActual];
-    var force = Electric.getCoulomb(indexParticulaActual,particulas);
+    let fuerza = Electric.getCoulomb(indexParticulaActual,particulas);
+    
 
     headingParticulaActual.innerHTML = "P" + String(indexParticulaActual+1) +
     "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z})` + 
     "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
+
+    headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector() + " N";
 
     $(this).addClass('active').siblings().removeClass('active');
 });
@@ -80,7 +89,20 @@ for (let i = 0; i < particulasPrueba.length; i++) {
     AgregarParticula(element);
 }
 
+//Returns true if there is a particle in particulas with the same position of particula
+function mismaPosicion(particula) 
+{
 
+    for (let i = 0; i < particulas.length; i++) {
+        const p = particulas[i];
+        if (p.position.x === particula.position.x  && p.position.y === particula.position.y && p.position.z === particula.position.z )
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 function getParticulaFromInput()
 {
@@ -88,6 +110,7 @@ function getParticulaFromInput()
     {
         return null;
     }
+
 
     let pX = Number(inputPosicionX.value);
     let pY = Number(inputPosicionY.value);
@@ -115,6 +138,7 @@ function ParametrosValidos()
         if(element.value === '' || isNaN(element.value))
         {
             element.classList.add("is-invalid");
+            element.value ="";
             ParametrosValidos = false;
         }
         
@@ -137,6 +161,13 @@ function AgregarParticula(particula)
     if(particula == null)
     {        
         return;
+    }
+
+    if (mismaPosicion(particula))
+    {
+        alert("Dos partículas no pueden poseer la misma posición.");
+        LimparCampos();
+        return;   
     }
 
     particulas.push(particula);

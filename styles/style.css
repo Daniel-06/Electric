@@ -59,13 +59,14 @@ body>h4,h5
 #resultado
 {
     width:80%;
-    height: 100px;
+    height: 120px;
     
 }
 #particula-actual
 {
    position: relative;
-   top:25px;
+   text-align: center;
+   top:20px;
    color: rgb(64, 143, 247);
 
 }
@@ -74,4 +75,14 @@ body>h4,h5
 tr.active 
 {
     background-color: rgb(184, 184, 253);
+}
+
+#heading-fuerza-neta
+{
+    position: relative;
+    margin-top:10px;
+    text-align: center;
+    top:20px;
+    color: rgb(0, 0, 0);
+   
 }
