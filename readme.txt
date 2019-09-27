@@ -1,1 +1,0 @@
-Simple App to calculate the Coulomb force exerted on charged particle by a given list of particles.
