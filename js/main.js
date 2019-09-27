@@ -69,10 +69,14 @@ function(event){
     $(this).addClass('active').siblings().removeClass('active');
 });
 
+
+
 for (let i = 0; i < particulasPrueba.length; i++) {
     const element = particulasPrueba[i];
     AgregarParticula(element);
 }
+
+
 
 function getParticulaFromInput()
 {
@@ -85,10 +89,11 @@ function getParticulaFromInput()
     let pY = Number(inputPosicionY.value);
     let pZ = Number(inputPosicionZ.value);
 
-    let carga = Number(inputCarga.value);
-
     let prefijo = selectPrefijo.options[selectPrefijo.selectedIndex].value;
     let prefijoVal = prefijos[prefijo];
+
+    let carga = Number(inputCarga.value) * prefijoVal;
+
 
     return new Particle(pX,pY,pZ,carga);
 
@@ -113,6 +118,14 @@ function ParametrosValidos()
     }
   
     return ParametrosValidos;
+}
+
+function LimparCampos()
+{
+    inputCarga.value = "";
+    inputPosicionX.value = "";
+    inputPosicionY.value = "";
+    inputPosicionZ.value = "";
 }
 
 function AgregarParticula(particula)
@@ -145,6 +158,8 @@ function AgregarParticula(particula)
     row.classList.add('clickable-row');
 
     tbody.appendChild(row);
+
+    LimparCampos();
 }
 
 
