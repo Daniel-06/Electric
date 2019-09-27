@@ -3,7 +3,9 @@ var particulas = [];
 var prefijos = {};
 var indexParticulaActual = -1;
 
-var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
+// var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
+var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
+    new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
 
 prefijos['tera'] = 1e12;
 prefijos['giga'] = 1e9;
@@ -56,15 +58,17 @@ var inputPosicionZ = document.getElementById("posicion-z");
 var agregarParticulaInputs = [inputPosicionX,inputPosicionY,inputPosicionZ,inputCarga];
 
 
+
 $("#tabla-particulas").on('click','.clickable-row',
 function(event){
     indexParticulaActual = Number(this.firstChild.textContent) - 1;
 
     let particula = particulas[indexParticulaActual];
+    var force = Electric.getCoulomb(indexParticulaActual,particulas);
 
     headingParticulaActual.innerHTML = "P" + String(indexParticulaActual+1) +
-    "&nbsp;&nbsp;Posición:  " + `(${particula.x},${particula.y},${particula.z})` + 
-    "&nbsp;&nbsp;Carga: " + particula.charge + " C";
+    "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z})` + 
+    "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
 
     $(this).addClass('active').siblings().removeClass('active');
 });
@@ -148,7 +152,7 @@ function AgregarParticula(particula)
     tdCarga.textContent = String(particula.charge) + " C";
 
     let tdPosicion = document.createElement("td");
-    tdPosicion.textContent = `(${particula.x},${particula.y},${particula.z})`;
+    tdPosicion.textContent = `(${particula.position.x},${particula.position.y},${particula.position.z})`;
 
 
     row.appendChild(tdNumero);
