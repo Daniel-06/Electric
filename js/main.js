@@ -67,8 +67,8 @@ var agregarParticulaInputs = [inputPosicionX,inputPosicionY,inputPosicionZ,input
 
 $("#tabla-particulas").on('click','.clickable-row',
 function(event){
-    indexParticulaActual = Number(this.firstChild.textContent) - 1;
-
+    // indexParticulaActual = Number(this.firstChild.textContent) - 1;
+    indexParticulaActual = Array.prototype.indexOf.call(tbody.children, this);
     let particula = particulas[indexParticulaActual];
     let fuerza = Electric.getCoulomb(indexParticulaActual,particulas);
     
@@ -80,6 +80,12 @@ function(event){
     headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector() + " N";
 
     $(this).addClass('active').siblings().removeClass('active');
+});
+
+var btnEliminarParticula = document.getElementById("eliminar-particula-btn");
+btnEliminarParticula.addEventListener("click",function()
+{
+    EliminarParticula(indexParticulaActual);
 });
 
 
@@ -197,15 +203,35 @@ function AgregarParticula(particula)
     LimparCampos();
 }
 
-
-function CalcularFuerza()
+function EliminarParticula(indiceParticula)
 {
     
-    let q1 = Number(document.getElementById("carga1").value);
-    let q2 = Number(document.getElementById("carga2").value);
-    let distancia = Number(document.getElementById("distancia").value);
-    
-    txtResultado.value = Electric.CoulombForce(q1,q2,distancia).toFixed(2) + "N";
- 
+    if (tbody.children.length === 0 || indiceParticula < 0) return;
+    particulas.splice(indiceParticula, 1);
+    tbody.children[indiceParticula].remove();
 
+    headingParticulaActual.textContent = "Seleccione una partícula";
+    headingResultado.textContent = "Resultado"
+    indexParticulaActual = -1;
+
+    ActualizarNumeracionParticulas(indiceParticula);
 }
+
+function ActualizarNumeracionParticulas(indiceInicio)
+{
+    for (let i = indiceInicio; i < tbody.children.length; i++) {
+        const row = tbody.children[i];
+        row.children[0].textContent = i + 1;
+    }
+}
+
+// function CalcularFuerza()
+// {
+    
+//     let q1 = Number(document.getElementById("carga1").value);
+//     let q2 = Number(document.getElementById("carga2").value);
+//     let distancia = Number(document.getElementById("distancia").value);
+    
+//     txtResultado.value = Electric.CoulombForce(q1,q2,distancia).toFixed(2) + "N";
+ 
+// }

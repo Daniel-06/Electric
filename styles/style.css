@@ -45,9 +45,10 @@ select:invalid
 
 
 
-#agregar-particula-btn
+#agregar-particula button
 {
     margin-top: 2em;
+    margin-left: 10px;
 }
 
 body>h4,h5
