@@ -2,6 +2,7 @@
 var particulas = [];
 var prefijos = {};
 var indexParticulaActual = -1;
+var precisionFuerzaNeta = 2;
 
 // var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
 
@@ -49,6 +50,11 @@ var tablaParticulas = document.getElementById("tabla-particulas");
 
 var tbody = tablaParticulas.getElementsByTagName("tbody")[0];
 
+var inputPrecision = document.getElementById("precision");
+inputPrecision.addEventListener("input",function(){
+   precisionFuerzaNeta = this.value;
+});
+
 var inputCarga = document.getElementById("carga");
     inputCarga.addEventListener("input",TextChanged);
 
@@ -77,7 +83,7 @@ function(event){
     "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z})` + 
     "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
 
-    headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector() + " N";
+    headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector(precisionFuerzaNeta) + " N";
 
     $(this).addClass('active').siblings().removeClass('active');
 });
@@ -225,6 +231,10 @@ function ActualizarNumeracionParticulas(indiceInicio)
     }
 }
 
+function redondearSalidas()
+{
+
+}
 // function CalcularFuerza()
 // {
     

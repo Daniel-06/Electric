@@ -4,8 +4,6 @@
  class Electric
 {
     
-
-    
     static CoulombForce(q1,q2,distance) 
     {
       return (k * q1*q2)/distance**2;
@@ -89,19 +87,32 @@ Vector.prototype.mult = function(number)
 }
 
 // Returns a string  in unit vector form (1i + 2j + 0k)
-Vector.prototype.formatUnitVector = function()
+Vector.prototype.formatUnitVector = function(precision)
 {
     let strVector = "(";
     
+    let x = this.x;
+    let y = this.y;
+    let z = this.z;
+
+    if (arguments.length> 0)
+    {
+        x = x.toFixed(precision);
+        y = y.toFixed(precision);
+        z = z.toFixed(precision);
+    }
+
+    console.log(arguments);
+    precision = 2;
 
     if (this.x>=0)
     {
-        strVector+= this.x + "î ";
+        strVector += x + "î ";
     }
 
     else
     {
-        strVector+="−" + this.x*-1 + "î ";
+        strVector+="−" + x*-1 + "î ";
     }
 
 
@@ -109,12 +120,12 @@ Vector.prototype.formatUnitVector = function()
 
     if (this.y>=0)
     {
-        strVector+="+ " + this.y + "ĵ ";
+        strVector+="+ " + y + "ĵ ";
     }
 
     else
     {
-        strVector+="− " + this.y*-1 + "ĵ ";
+        strVector+="− " + y*-1 + "ĵ ";
     }
 
 
@@ -122,12 +133,12 @@ Vector.prototype.formatUnitVector = function()
 
     if (this.z>=0)
     {
-        strVector += "+ " + this.z + "k̂";
+        strVector += "+ " + z + "k̂";
     }
 
     else
     {
-        strVector +="− " + this.z*-1 + "k̂";
+        strVector +="− " + z*-1 + "k̂";
     }
 
 
