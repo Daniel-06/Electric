@@ -102,7 +102,7 @@ Vector.prototype.formatUnitVector = function(precision)
         z = z.toFixed(precision);
     }
 
-    console.log(arguments);
+    
     precision = 2;
 
     if (this.x>=0)

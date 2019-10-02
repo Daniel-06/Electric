@@ -227,6 +227,24 @@ function EliminarParticula(indiceParticula)
     ActualizarNumeracionParticulas(indiceParticula);
 }
 
+function EliminarListaParticulas()
+{
+    
+    particulas = [];
+    
+    while (tbody.lastChild) {
+        
+        tbody.removeChild(tbody.lastChild);
+      }
+
+    headingParticulaActual.textContent = "Seleccione una partícula";
+    headingResultado.textContent = "Resultado"
+    headingMagnitudFuerza.textContent = "Magnitud";
+    indexParticulaActual = -1;
+
+    
+}
+
 function ActualizarNumeracionParticulas(indiceInicio)
 {
     for (let i = indiceInicio; i < tbody.children.length; i++) {
