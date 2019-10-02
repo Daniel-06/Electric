@@ -19,7 +19,7 @@ h1
    background-color: whitesmoke;
    border-radius:5px;
    border: 1px solid darkgrey;
-   
+   height: 139px;
 }
 
 .container
@@ -71,8 +71,14 @@ body>h4,h5
 #resultado
 {
     width:80%;
-    height: 120px;
+    height: 150px;
     
+}
+
+#magnitud-coulomb
+{
+    margin-top: 30px;
+    text-align: center;
 }
 #particula-actual
 {
@@ -101,10 +107,7 @@ tr.active
 
 label[for = 'cifra-significativa']
 {
-    /* margin-left: 60%
-    margin-right: 0; */
-    position:relative;
-    bottom: 4.2em;
+    margin-top:5px;
 }
 
 #div-cifra-significativa
@@ -116,4 +119,22 @@ label[for = 'cifra-significativa']
 {
     text-align: center;
     margin-bottom: 10px;
+}
+
+#limpiar-lista,#opcion-electric
+{
+    margin-top:2.3em;
+}
+
+#herramientas 
+{
+    width:50%;
+    /* text-align: center; */
+    
+}
+
+#herramientas div *
+{
+    display: inline-block;
+    
 }

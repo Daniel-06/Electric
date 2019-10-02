@@ -2,15 +2,15 @@
 var particulas = [];
 var prefijos = {};
 var indexParticulaActual = -1;
-var precisionFuerzaNeta = 2;
+var precisionFuerza = 2;
 
 // var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
 
-// var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
-//     new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
+var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
+    new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
 
-var particulasPrueba =[ new Particle(0,0,0,0.000003),new Particle(0,0.6,0,0.000005),
-    new Particle(0.8,0.6,0,0.000007),new Particle(0.8,0,0,-0.000004)];
+// var particulasPrueba =[ new Particle(0,0,0,0.000003),new Particle(0,0.6,0,0.000005),
+//     new Particle(0.8,0.6,0,0.000007),new Particle(0.8,0,0,-0.000004)];
 
 prefijos['tera'] = 1e12;
 prefijos['giga'] = 1e9;
@@ -44,6 +44,8 @@ var headingParticulaActual = document.getElementById("particula-actual");
 
 var headingResultado = document.getElementById("heading-fuerza-neta");
 
+var headingMagnitudFuerza = document.getElementById("magnitud-coulomb");
+
 var selectPrefijo = document.getElementById("select-prefijo");
 
 var tablaParticulas = document.getElementById("tabla-particulas");
@@ -52,7 +54,7 @@ var tbody = tablaParticulas.getElementsByTagName("tbody")[0];
 
 var inputPrecision = document.getElementById("precision");
 inputPrecision.addEventListener("input",function(){
-   precisionFuerzaNeta = this.value;
+   precisionFuerza = this.value;
 });
 
 var inputCarga = document.getElementById("carga");
@@ -83,7 +85,8 @@ function(event){
     "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z})` + 
     "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
 
-    headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector(precisionFuerzaNeta) + " N";
+    headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector(precisionFuerza) + " N";
+    headingMagnitudFuerza.innerHTML = "F = " + fuerza.mag().toFixed(precisionFuerza) + " N" ;
 
     $(this).addClass('active').siblings().removeClass('active');
 });
@@ -218,6 +221,7 @@ function EliminarParticula(indiceParticula)
 
     headingParticulaActual.textContent = "Seleccione una partícula";
     headingResultado.textContent = "Resultado"
+    headingMagnitudFuerza.textContent = "Magnitud";
     indexParticulaActual = -1;
 
     ActualizarNumeracionParticulas(indiceParticula);

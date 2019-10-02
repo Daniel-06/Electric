@@ -6,7 +6,7 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Campo Electrico Simulacion</title>
+        <title>Ley de Coulomb</title>
         <link rel="icon" href="img/light.png">
         <style> body {padding: 0; margin: 0;} </style>
         <script src="js/Electric.js"></script>
@@ -58,11 +58,8 @@
                                         </div>
 
                                         
-                                        <div id="div-cifra-significativa" class="col-2">
-
-                                            <input id= "precision" type="number" value="2" name="cifra-significativa" min="1" max="15"  class="form-control form-control-md">
-                                            <label for="cifra-significativa">Precisión</label>
-                                        </div>
+                                        
+                                        
 
                                     </div>
                                    
@@ -134,10 +131,30 @@
                         
             </div>
 
+            <div class="container" id="herramientas">
+                <div class="row">
+                    <div id="div-cifra-significativa" class="col-2">
+                            <label for="cifra-significativa">Precisión</label>
+                            <input id= "precision" type="number" value="2" name="cifra-significativa" min="1" max="15"  class="form-control form-control-md">    
+                    </div>
+        
+                    <div  class="col-2">
+                            <button type="button"  id="limpiar-lista"class="btn btn-md btn-secondary">Limpiar</button>
+                    </div>
+
+                    <div  class="col-3">
+                            <select  id="opcion-electric" class="form-control"></select>
+                    </div>
+                </div>
+               
+            </div>
+
+
             <h3 class="container-title">Resultado</h3>
             <div class="container" id="resultado">
                 <h5 id="particula-actual">Seleccione una partícula</h5>
                 <h5 id="heading-fuerza-neta">Fuerza Neta</h5>
+                <h5 id="magnitud-coulomb">Magnitud</h5>
             </div>
 
             <h4>Particulas:</h4>
