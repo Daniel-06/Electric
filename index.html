@@ -119,7 +119,7 @@
                                         <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
                                         Agregar
                                     </button>
-                                    <button type="button" class="btn btn-md btn-danger" id="eliminar-particula-btn">Eliminar</button>
+                                    
                                 </div>
                             </div>
                           
@@ -138,10 +138,14 @@
                             <input id= "precision" type="number" value="2" name="cifra-significativa" min="1" max="15"  class="form-control form-control-md">    
                     </div>
         
-                    <div  class="col-2">
-                            <button type="button"  id="limpiar-lista"class="btn btn-md btn-secondary" onclick="EliminarListaParticulas()">Limpiar</button>
+                    <div  class="col-3">
+                        <button type="button"  id="limpiar-lista"class="btn btn-md btn-secondary" onclick="EliminarListaParticulas()">Limpiar Lista</button>      
                     </div>
 
+                    <div class="col-2">
+                            <button type="button" class="btn btn-md btn-danger" id="eliminar-particula-btn">Eliminar</button>
+                    </div>
+                         
                     <div  class="col-3">
                             <select  id="opcion-electric" disabled class="form-control"></select>
                     </div>
@@ -150,7 +154,7 @@
             </div>
 
 
-            <h3 class="container-title">Resultado</h3>
+            <h3 class="container-title">Fuerza de Coulomb</h3>
             <div class="container" id="resultado">
                 <h5 id="particula-actual">Seleccione una partícula</h5>
                 <h5 id="heading-fuerza-neta">Fuerza Neta</h5>

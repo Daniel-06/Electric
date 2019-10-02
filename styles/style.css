@@ -121,10 +121,13 @@ label[for = 'cifra-significativa']
     margin-bottom: 10px;
 }
 
-#limpiar-lista,#opcion-electric
+#limpiar-lista,#opcion-electric,#eliminar-particula-btn
 {
     margin-top:2.3em;
+    margin-left: 0;
 }
+
+
 
 #herramientas 
 {
@@ -137,4 +140,10 @@ label[for = 'cifra-significativa']
 {
     display: inline-block;
     
+}
+
+#herramientas div 
+{
+    margin-left: 0px;   
+    width:90%;
 }

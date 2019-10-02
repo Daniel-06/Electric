@@ -85,8 +85,8 @@ function(event){
     "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z})` + 
     "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
 
-    headingResultado.innerHTML = "Fuerza neta = " + fuerza.formatUnitVector(precisionFuerza) + " N";
-    headingMagnitudFuerza.innerHTML = "F = " + fuerza.mag().toFixed(precisionFuerza) + " N" ;
+    headingResultado.innerHTML = "<strong>F</strong> = " + fuerza.formatUnitVector(precisionFuerza) + " N";
+    headingMagnitudFuerza.innerHTML = "|F| = " + fuerza.mag().toFixed(precisionFuerza) + " N" ;
 
     $(this).addClass('active').siblings().removeClass('active');
 });
@@ -229,6 +229,11 @@ function EliminarParticula(indiceParticula)
 
 function EliminarListaParticulas()
 {
+
+    if ( particulas.length == 0 || !confirm('¿Desea eliminar lista de particulas?')) {
+        
+        return;
+    } 
     
     particulas = [];
     
