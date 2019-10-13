@@ -20,6 +20,7 @@ h1
    border-radius:5px;
    border: 1px solid darkgrey;
    height: 139px;
+   
 }
 
 .container
@@ -59,7 +60,7 @@ select:invalid
 #agregar-particula button
 {
     margin-top: 2em;
-    margin-left: 10px;
+    margin-left: 20%;
 }
 
 body>h4,h5

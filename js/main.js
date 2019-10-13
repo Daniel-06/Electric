@@ -38,7 +38,7 @@ var TextChanged = function (e)
 
 }
 
-// Declare input and outpu DOM Elements
+// Declare input and output DOM Elements
 
 var headingParticulaActual = document.getElementById("particula-actual");
 
@@ -53,6 +53,7 @@ var tablaParticulas = document.getElementById("tabla-particulas");
 var tbody = tablaParticulas.getElementsByTagName("tbody")[0];
 
 var inputPrecision = document.getElementById("precision");
+
 inputPrecision.addEventListener("input",function(){
    precisionFuerza = this.value;
 });
@@ -82,7 +83,7 @@ function(event){
     
 
     headingParticulaActual.innerHTML = "P" + String(indexParticulaActual+1) +
-    "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z})` + 
+    "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z}) m` + 
     "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
 
     headingResultado.innerHTML = "<strong>F</strong> = " + fuerza.formatUnitVector(precisionFuerza) + " N";
@@ -198,7 +199,7 @@ function AgregarParticula(particula)
     tdCarga.textContent = String(particula.charge) + " C";
 
     let tdPosicion = document.createElement("td");
-    tdPosicion.textContent = `(${particula.position.x},${particula.position.y},${particula.position.z})`;
+    tdPosicion.textContent = `(${particula.position.x},${particula.position.y},${particula.position.z}) m`;
 
 
     row.appendChild(tdNumero);
@@ -215,7 +216,9 @@ function AgregarParticula(particula)
 function EliminarParticula(indiceParticula)
 {
     
-    if (tbody.children.length === 0 || indiceParticula < 0) return;
+    if (tbody.children.length === 0 || indiceParticula < 0 || indiceParticula >= particulas.length) 
+    return;
+
     particulas.splice(indiceParticula, 1);
     tbody.children[indiceParticula].remove();
 
@@ -260,8 +263,9 @@ function ActualizarNumeracionParticulas(indiceInicio)
 
 function redondearSalidas()
 {
-
+    //Codigo a implementar
 }
+
 // function CalcularFuerza()
 // {
     

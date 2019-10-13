@@ -10,6 +10,7 @@
     }
 
 
+    // Returns a force vector exerted on a particle by a list of particles
     static getCoulomb (indexParticle,particles)
     {   
         var particle = particles[indexParticle];
