@@ -36,7 +36,58 @@
 
     static getElectricFfield(point,particles)
     {
+        let resultField = new Vector(0,0,0);
+
+        particles.forEach( p => {
+            
+            let distanceVector = Vector.dist(point,p.position);
+            let distanceMag = distanceVector.mag();
+            
+            //Field of the particle divided by k
+            distanceVector.mult(p.charge/distanceMag**3)
+             
+            // console.log(distanceVector);
+            resultField.add(distanceVector);
+        });
+
+        resultField.mult(k);
+        return resultField;
+    }
+
+    static PotentialEnergy(particles)
+    {
+        let currentParticle,remainingParticles;
+        remainingParticles = [...particles];
+        let potentialEnergy = 0;
         
+        while(remainingParticles.length>0)
+        {
+            [currentParticle,...remainingParticles] = remainingParticles;
+            
+            for (let i = 0; i < remainingParticles.length; i++) {
+                const p = remainingParticles[i];
+                
+                potentialEnergy+=(currentParticle.charge * p.charge)/Vector.dist(currentParticle.position,p.position).mag();
+                
+            }
+
+        }
+        
+        potentialEnergy*= k;
+        return potentialEnergy;
+        
+    }
+
+    static ElectricPotential(point,particles)
+    {
+        let electricPotential = 0;
+
+        particles.forEach(p => {
+            electricPotential+= p.charge/Vector.dist(point,p.position).mag();
+        });
+
+        electricPotential*=k;
+        return electricPotential;
     }
 }
 

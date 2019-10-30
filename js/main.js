@@ -9,11 +9,14 @@ var estadoOperacion = 0;
 
 // var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
 
-var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
-    new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
+// var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
+//     new Particle(0.3,0.2,0,0.0000075),new Particle(0.3,0,0,-0.0000015)];
 
 // var particulasPrueba =[ new Particle(0,0,0,0.000003),new Particle(0,0.6,0,0.000005),
 //     new Particle(0.8,0.6,0,0.000007),new Particle(0.8,0,0,-0.000004)];
+
+var particulasPrueba = [new Particle(0,0,0,0.000003),new Particle(0,0.06,0,0.000002),
+       new Particle(0.08,0.06,0,-0.000007),new Particle(0.08,0,0,0.000005)];
 
 prefijos['tera'] = 1e12;
 prefijos['giga'] = 1e9;
@@ -84,6 +87,17 @@ var inputOpcionOperacion = document.getElementById("opcion-electric");
 
 var contenedorPunto = document.getElementById("contenedor-punto");
 
+var inputPuntoX = document.getElementById("punto-x");
+    inputPuntoX.addEventListener("input",TextChanged);
+
+var inputPuntoY = document.getElementById("punto-y");
+    inputPuntoY.addEventListener("input",TextChanged);
+
+var inputPuntoZ = document.getElementById("punto-z");
+    inputPuntoZ.addEventListener("input",TextChanged);
+
+var puntoInputs = [inputPuntoX,inputPuntoY,inputPuntoZ];
+
 function fuerzaCoulomb()
 {
     if(indexParticulaActual<0) return;
@@ -97,6 +111,43 @@ function fuerzaCoulomb()
 function campoElectrico()
 {
     
+    let pX = Number(inputPuntoX.value);
+    let pY = Number(inputPuntoY.value);
+    let pZ = Number(inputPuntoZ.value);
+
+    let punto = new Vector(pX,pY,pZ);
+
+    
+
+    let campoElectrico = Electric.getElectricFfield(punto,particulas);
+    headingResultado.innerHTML = "<strong>E</strong>= " +campoElectrico.formatUnitVector(precisionFuerza) + " N/C";
+    headingMagnitud.innerHTML = "|E|= "+campoElectrico.mag().toString()+ " N/C";
+}
+
+function energiaPotencial()
+{
+    let energiaPotencial = Electric.PotentialEnergy(particulas);
+    headingResultado.innerHTML = "Energia Potencial";
+    headingMagnitud.innerHTML = "U = " + energiaPotencial.toString() + " J";
+}
+
+function potencialElectrico()
+{   
+    if (!ParametrosValidos(puntoInputs))
+    {
+        headingsResultadoPorDefecto();
+        return;
+    }
+
+    let pX = Number(inputPuntoX.value);
+    let pY = Number(inputPuntoY.value);
+    let pZ = Number(inputPuntoZ.value);
+
+    let punto = new Vector(pX,pY,pZ);
+
+    let potencial = Electric.ElectricPotential(punto,particulas);
+    headingResultado.innerHTML = "Potencial Eléctrico";
+    headingMagnitud.innerHTML = "V = " + potencial.toString() + " V";
 }
 
 function ejecutarOperacion()
@@ -106,13 +157,13 @@ function ejecutarOperacion()
           fuerzaCoulomb();
           break;
         case 'campoElectrico':
-          
+          campoElectrico();
           break;
-        case 'campoElectrico':
-          
+        case 'energiaPotencial':
+          energiaPotencial()
           break;
         case 'potencialElectrico':
-        
+          potencialElectrico()
           break;
         default:
           
@@ -176,7 +227,7 @@ function mismaPosicion(particula)
 
 function getParticulaFromInput()
 {
-    if (!ParametrosValidos())
+    if (!ParametrosValidos(agregarParticulaInputs))
     {
         return null;
     }
@@ -196,14 +247,14 @@ function getParticulaFromInput()
 
 }
 
-function ParametrosValidos()
+function ParametrosValidos(inputArray)
 {
     let ParametrosValidos = true;
 
-    for (let i = 0; i < agregarParticulaInputs.length; i++) 
+    for (let i = 0; i < inputArray.length; i++) 
     {
         
-        const element = agregarParticulaInputs[i];
+        const element = inputArray[i];
         
         if(element.value === '' || isNaN(element.value))
         {
