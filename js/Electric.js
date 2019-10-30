@@ -34,6 +34,10 @@
         return result;
     }
 
+    static getElectricFfield(point,particles)
+    {
+        
+    }
 }
 
 

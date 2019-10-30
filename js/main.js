@@ -49,6 +49,8 @@ var headingResultado = document.getElementById("heading-vector-neto");
 
 var headingMagnitud = document.getElementById("heading-magnitud");
 
+var headingContenedorResultado = document.getElementById("titulo-operacion");
+
 var selectPrefijo = document.getElementById("select-prefijo");
 
 var tablaParticulas = document.getElementById("tabla-particulas");
@@ -84,10 +86,37 @@ var contenedorPunto = document.getElementById("contenedor-punto");
 
 function fuerzaCoulomb()
 {
-    let fuerza = Electric.getCoulomb(indexParticulaActual,particulas);
+    if(indexParticulaActual<0) return;
 
+    let fuerza = Electric.getCoulomb(indexParticulaActual,particulas);
+    
     headingResultado.innerHTML = "<strong>F</strong> = " + fuerza.formatUnitVector(precisionFuerza) + " N";
     headingMagnitud.innerHTML = "|F| = " + fuerza.mag().toFixed(precisionFuerza) + " N" ;
+}
+
+function campoElectrico()
+{
+    
+}
+
+function ejecutarOperacion()
+{
+    switch(operaciones[estadoOperacion]) {
+        case 'coulomb':
+          fuerzaCoulomb();
+          break;
+        case 'campoElectrico':
+          
+          break;
+        case 'campoElectrico':
+          
+          break;
+        case 'potencialElectrico':
+        
+          break;
+        default:
+          
+      }
 }
 
 $("#tabla-particulas").on('click','.clickable-row',
@@ -103,7 +132,11 @@ function(event){
     
     $(this).addClass('active').siblings().removeClass('active');
 
-    fuerzaCoulomb();
+    
+    if(operaciones[estadoOperacion] === 'coulomb')
+    {
+        fuerzaCoulomb();
+    }
   
 });
 
@@ -111,6 +144,12 @@ var btnEliminarParticula = document.getElementById("eliminar-particula-btn");
 btnEliminarParticula.addEventListener("click",function()
 {
     EliminarParticula(indexParticulaActual);
+});
+
+var btnCalcular = document.getElementById("calcular-btn");
+btnCalcular.addEventListener("click",function()
+{
+    ejecutarOperacion();
 });
 
 
@@ -179,7 +218,7 @@ function ParametrosValidos()
     return ParametrosValidos;
 }
 
-function LimparCampos()
+function LimpiarCampos()
 {
     inputCarga.value = "";
     inputPosicionX.value = "";
@@ -197,7 +236,7 @@ function AgregarParticula(particula)
     if (mismaPosicion(particula))
     {
         alert("Dos partículas no pueden poseer la misma posición.");
-        LimparCampos();
+        LimpiarCampos();
         return;   
     }
 
@@ -225,7 +264,7 @@ function AgregarParticula(particula)
 
     tbody.appendChild(row);
 
-    LimparCampos();
+    LimpiarCampos();
 }
 
 function EliminarParticula(indiceParticula)
@@ -237,12 +276,18 @@ function EliminarParticula(indiceParticula)
     particulas.splice(indiceParticula, 1);
     tbody.children[indiceParticula].remove();
 
-    headingParticulaActual.textContent = "Seleccione una partícula";
-    headingResultado.textContent = "Resultado"
-    headingMagnitud.textContent = "Magnitud";
     indexParticulaActual = -1;
 
+    headingsResultadoPorDefecto();
+
     ActualizarNumeracionParticulas(indiceParticula);
+}
+
+function headingsResultadoPorDefecto()
+{
+    headingParticulaActual.textContent = "Seleccione una partícula";
+    headingResultado.textContent = "Resultado";
+    headingMagnitud.textContent = "Magnitud";
 }
 
 function EliminarListaParticulas()
@@ -260,9 +305,7 @@ function EliminarListaParticulas()
         tbody.removeChild(tbody.lastChild);
       }
 
-    headingParticulaActual.textContent = "Seleccione una partícula";
-    headingResultado.textContent = "Resultado"
-    headingMagnitud.textContent = "Magnitud";
+    headingsResultadoPorDefecto();
     indexParticulaActual = -1;
 
     
@@ -285,17 +328,45 @@ function cambiarEstado(estado)
     {
          return;
     }
-
+    
+    headingParticulaActual.setAttribute("hidden","hidden");
     estadoOperacion = estadoIndice;
+    
+    headingsResultadoPorDefecto();
+    deseleccionarParticula();
+   
 
-    if(estado == operaciones[1] || estado == operaciones[2])
+
+    if(estado === operaciones[1] || estado === operaciones[2])
     {
         camposPuntoVisible(true);
+
+        if (estado === operaciones[1])
+        {
+            headingContenedorResultado.innerHTML = "Campo Eléctrico";
+        }
+
+        else
+        {
+            headingContenedorResultado.innerHTML = "Potencial Eléctrico";
+        }
     }
 
     else
     {
         camposPuntoVisible(false);
+
+        if (estado === operaciones[0])
+        {
+            headingContenedorResultado.innerHTML = "Fuerza de Coulomb";
+            headingParticulaActual.removeAttribute("hidden");
+            
+        }
+
+        else
+        {
+            headingContenedorResultado.innerHTML = "Energia Potencial";
+        }
     }
 }
 
@@ -312,6 +383,24 @@ function camposPuntoVisible(esVisible)
     }
 }
 
+function deseleccionarParticula()
+{
+    if(indexParticulaActual<0) return;
+
+    // for (let i = 0; i < tbody.children.length; i++) {
+    //     const tr = tbody.children[i];
+       
+    //     if(tr.classList.contains("active"))
+    //     {   
+    //         tr.classList.remove("active");
+    //         break;
+    //     }
+    // }
+    
+    
+    tbody.children[indexParticulaActual].classList.remove("active");
+    indexParticulaActual = -1;
+}
 
 function redondearSalidas()
 {
