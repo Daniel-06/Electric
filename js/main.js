@@ -4,6 +4,9 @@ var prefijos = {};
 var indexParticulaActual = -1;
 var precisionFuerza = 2;
 
+var operaciones = ['coulomb','campoElectrico','potencialElectrico','energiaPotencial'];
+var estadoOperacion = 0;
+
 // var particulasPrueba =[ new Particle(3,25,62,20),new Particle(52,100,20,5),new Particle(10,30,50,2)];
 
 var particulasPrueba =[ new Particle(0,0,0,0.0000025),new Particle(0,0.2,0,0.000002),
@@ -42,9 +45,9 @@ var TextChanged = function (e)
 
 var headingParticulaActual = document.getElementById("particula-actual");
 
-var headingResultado = document.getElementById("heading-fuerza-neta");
+var headingResultado = document.getElementById("heading-vector-neto");
 
-var headingMagnitudFuerza = document.getElementById("magnitud-coulomb");
+var headingMagnitud = document.getElementById("heading-magnitud");
 
 var selectPrefijo = document.getElementById("select-prefijo");
 
@@ -72,24 +75,36 @@ var inputPosicionZ = document.getElementById("posicion-z");
 
 var agregarParticulaInputs = [inputPosicionX,inputPosicionY,inputPosicionZ,inputCarga];
 
+//Input herramientas
 
+var inputOpcionOperacion = document.getElementById("opcion-electric");
+    inputOpcionOperacion.addEventListener("change",(e) => cambiarEstado(inputOpcionOperacion.value));
+
+var contenedorPunto = document.getElementById("contenedor-punto");
+
+function fuerzaCoulomb()
+{
+    let fuerza = Electric.getCoulomb(indexParticulaActual,particulas);
+
+    headingResultado.innerHTML = "<strong>F</strong> = " + fuerza.formatUnitVector(precisionFuerza) + " N";
+    headingMagnitud.innerHTML = "|F| = " + fuerza.mag().toFixed(precisionFuerza) + " N" ;
+}
 
 $("#tabla-particulas").on('click','.clickable-row',
 function(event){
     // indexParticulaActual = Number(this.firstChild.textContent) - 1;
     indexParticulaActual = Array.prototype.indexOf.call(tbody.children, this);
-    let particula = particulas[indexParticulaActual];
-    let fuerza = Electric.getCoulomb(indexParticulaActual,particulas);
     
+    let particula = particulas[indexParticulaActual];
 
     headingParticulaActual.innerHTML = "P" + String(indexParticulaActual+1) +
     "&nbsp;&nbsp;Posición:  " + `(${particula.position.x},${particula.position.y},${particula.position.z}) m` + 
     "&nbsp;&nbsp;Carga: " + particula.charge + " C" ;
-
-    headingResultado.innerHTML = "<strong>F</strong> = " + fuerza.formatUnitVector(precisionFuerza) + " N";
-    headingMagnitudFuerza.innerHTML = "|F| = " + fuerza.mag().toFixed(precisionFuerza) + " N" ;
-
+    
     $(this).addClass('active').siblings().removeClass('active');
+
+    fuerzaCoulomb();
+  
 });
 
 var btnEliminarParticula = document.getElementById("eliminar-particula-btn");
@@ -224,7 +239,7 @@ function EliminarParticula(indiceParticula)
 
     headingParticulaActual.textContent = "Seleccione una partícula";
     headingResultado.textContent = "Resultado"
-    headingMagnitudFuerza.textContent = "Magnitud";
+    headingMagnitud.textContent = "Magnitud";
     indexParticulaActual = -1;
 
     ActualizarNumeracionParticulas(indiceParticula);
@@ -247,7 +262,7 @@ function EliminarListaParticulas()
 
     headingParticulaActual.textContent = "Seleccione una partícula";
     headingResultado.textContent = "Resultado"
-    headingMagnitudFuerza.textContent = "Magnitud";
+    headingMagnitud.textContent = "Magnitud";
     indexParticulaActual = -1;
 
     
@@ -261,18 +276,45 @@ function ActualizarNumeracionParticulas(indiceInicio)
     }
 }
 
+function cambiarEstado(estado)
+{
+    let estadoIndice = operaciones.indexOf(estado);
+    
+  
+    if (estadoIndice === estadoOperacion)
+    {
+         return;
+    }
+
+    estadoOperacion = estadoIndice;
+
+    if(estado == operaciones[1] || estado == operaciones[2])
+    {
+        camposPuntoVisible(true);
+    }
+
+    else
+    {
+        camposPuntoVisible(false);
+    }
+}
+
+function camposPuntoVisible(esVisible)
+{
+    if(esVisible)
+    {
+        contenedorPunto.removeAttribute("hidden");
+    }
+
+    else
+    {
+        contenedorPunto.setAttribute("hidden","hidden");
+    }
+}
+
+
 function redondearSalidas()
 {
     //Codigo a implementar
 }
 
-// function CalcularFuerza()
-// {
-    
-//     let q1 = Number(document.getElementById("carga1").value);
-//     let q2 = Number(document.getElementById("carga2").value);
-//     let distancia = Number(document.getElementById("distancia").value);
-    
-//     txtResultado.value = Electric.CoulombForce(q1,q2,distancia).toFixed(2) + "N";
- 
-// }

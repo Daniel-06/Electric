@@ -76,7 +76,7 @@ body>h4,h5
     
 }
 
-#magnitud-coulomb
+#heading-magnitud
 {
     margin-top: 30px;
     text-align: center;
@@ -96,7 +96,7 @@ tr.active
     background-color: rgb(184, 184, 253);
 }
 
-#heading-fuerza-neta
+#heading-vector-neto
 {
     position: relative;
     margin-top:10px;
@@ -160,5 +160,5 @@ label[for = 'cifra-significativa']
 #contenedor-punto label
 {
     padding-top: 0.3rem;
-    margin-left: 0.9rem;
+    margin-left: 3rem;
 }

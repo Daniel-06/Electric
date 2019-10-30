@@ -131,7 +131,7 @@
             </div>
             
             
-            <div class="container-fluid" id="herramientas">
+            <div class="container" id="herramientas">
                 <div class="form-row">
                     
                     <div id="div-cifra-significativa" class="col-1.5">
@@ -141,10 +141,10 @@
 
                     <div  class="col">
                             <select  id="opcion-electric"  class="form-control">
-                                <option value="">Fuerza de Coulumb</option>
-                                <option value="">Campo Electrico</option>
-                                <option value="">Potencial Electrico</option>
-                                <option value="">Energia Potencial</option>
+                                <option value="coulomb">Fuerza de Coulumb</option>
+                                <option value="campoElectrico">Campo Electrico</option>
+                                <option value="potencialElectrico">Potencial Electrico</option>
+                                <option value="energiaPotencial">Energia Potencial</option>
                             </select>
                     </div>
 
@@ -165,11 +165,9 @@
                     
                 </div>
                 
+                
                 <div class="row" id="contenedor-punto" hidden>
-
-
-                    
-                    <label for="posicion:">Punto (m)</label>
+                    <label for="contenedor-punto">Punto (m)</label>
                     <div class="col-3">
 
                         <div class="input-group">
@@ -223,8 +221,12 @@
             <h3 class="container-title">Fuerza de Coulomb</h3>
             <div class="container" id="resultado">
                 <h5 id="particula-actual">Seleccione una partícula</h5>
-                <h5 id="heading-fuerza-neta">Fuerza Neta</h5>
-                <h5 id="magnitud-coulomb">Magnitud</h5>
+                
+                <!-- <h5 id="heading-fuerza-neta">Fuerza Neta</h5> -->
+                <h5 id="heading-vector-neto">Fuerza Neta</h5>
+                <!-- <h5 id="magnitud-coulomb">Magnitud</h5> -->
+                <h5 id="heading-magnitud">Magnitud</h5>
+              
             </div>
 
             <h4>Particulas:</h4>
