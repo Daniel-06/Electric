@@ -122,7 +122,7 @@ label[for = 'cifra-significativa']
     margin-bottom: 10px;
 }
 
-#limpiar-lista,#opcion-electric,#eliminar-particula-btn
+#limpiar-lista,#opcion-electric,#eliminar-particula-btn,#calcular-btn
 {
     margin-top:2.3em;
     margin-left: 0;
@@ -132,19 +132,33 @@ label[for = 'cifra-significativa']
 
 #herramientas 
 {
-    width:50%;
+    width:750px;
+    
     /* text-align: center; */
     
 }
 
-#herramientas div *
+
+
+#opcion-electric
 {
-    display: inline-block;
-    
+    margin-left: 12px;
+    width: 90%;
 }
 
-#herramientas div 
+
+#contenedor-punto
 {
-    margin-left: 0px;   
-    width:90%;
+    margin-top: 50px;
+
+}
+
+#calcular-btn
+{
+    margin-right: 80px;
+}
+#contenedor-punto label
+{
+    padding-top: 0.3rem;
+    margin-left: 0.9rem;
 }

@@ -18,6 +18,7 @@
     </head>
     
     <body>
+
         <h1>Ley de Coulomb</h1>
             <div class="container-fluid" id="form">   
                     <form id= "" action="">
@@ -125,34 +126,99 @@
                           
                         </fieldset>
 
-                        
-                
-                        </form>
+                    </form>
                         
             </div>
-
-            <div class="container" id="herramientas">
-                <div class="row">
-                    <div id="div-cifra-significativa" class="col-2">
+            
+            
+            <div class="container-fluid" id="herramientas">
+                <div class="form-row">
+                    
+                    <div id="div-cifra-significativa" class="col-1.5">
                             <label for="cifra-significativa">Precisión</label>
                             <input id= "precision" title="Cifras significativas despues del punto" type="number" value="2" name="cifra-significativa" min="1" max="15"  class="form-control form-control-md">    
                     </div>
+
+                    <div  class="col">
+                            <select  id="opcion-electric"  class="form-control">
+                                <option value="">Fuerza de Coulumb</option>
+                                <option value="">Campo Electrico</option>
+                                <option value="">Potencial Electrico</option>
+                                <option value="">Energia Potencial</option>
+                            </select>
+                    </div>
+
+                    <div class="col-1.5">
+                            <button class="btn btn-md btn-secondary" id="calcular-btn">Calcular</button>
+                        </div>
+                        
         
-                    <div  class="col-3">
+                    <div  class="col-2.5">
                         <button type="button"  id="limpiar-lista"class="btn btn-md btn-secondary" onclick="EliminarListaParticulas()">Limpiar Lista</button>      
                     </div>
 
+                    
                     <div class="col-2">
                             <button type="button" class="btn btn-md btn-danger" id="eliminar-particula-btn">Eliminar</button>
                     </div>
                          
-                    <div  class="col-3">
-                            <select  id="opcion-electric" disabled class="form-control"></select>
-                    </div>
+                    
                 </div>
-               
-            </div>
+                
+                <div class="row" id="contenedor-punto" hidden>
 
+
+                    
+                    <label for="posicion:">Punto (m)</label>
+                    <div class="col-3">
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">X</div>
+                            </div>
+                            <input class="form-control" type="text"  name="posicionX" id="punto-x">
+                            <div class="invalid-feedback">
+                                Ingrese  un numero valido.
+                            </div>
+                        </div>
+                            
+                    </div>
+
+                    <div class="col-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Y</div>
+                                </div>
+                                <input class="form-control" type="text"  name="posicionY" id="punto-y">
+                                <div class="invalid-feedback">
+                                    Ingrese  un numero valido.
+                                </div>
+                            </div>
+                    </div>
+                   
+
+                    <div class="col-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Z</div>
+                                </div>
+                                <input class="form-control" type="text"  name="posicionZ" id="punto-z">
+                                <div class="invalid-feedback">
+                                    Ingrese  un numero valido.
+                                </div>
+                            </div>
+                    </div>
+
+                    
+
+                    
+    
+            </div>
+  
+                
+            </div>
+            
+           
 
             <h3 class="container-title">Fuerza de Coulomb</h3>
             <div class="container" id="resultado">
