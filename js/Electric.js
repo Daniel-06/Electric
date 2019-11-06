@@ -46,7 +46,6 @@
             //Field of the particle divided by k
             distanceVector.mult(p.charge/distanceMag**3)
              
-            // console.log(distanceVector);
             resultField.add(distanceVector);
         });
 

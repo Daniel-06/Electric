@@ -98,6 +98,8 @@ var inputPuntoZ = document.getElementById("punto-z");
 
 var puntoInputs = [inputPuntoX,inputPuntoY,inputPuntoZ];
 
+
+
 function fuerzaCoulomb()
 {
     if(indexParticulaActual<0) return;
@@ -110,6 +112,11 @@ function fuerzaCoulomb()
 
 function campoElectrico()
 {
+    if (!ParametrosValidos(puntoInputs))
+    {
+        headingsResultadoPorDefecto();
+        return;
+    }
     
     let pX = Number(inputPuntoX.value);
     let pY = Number(inputPuntoY.value);
@@ -254,12 +261,12 @@ function ParametrosValidos(inputArray)
     for (let i = 0; i < inputArray.length; i++) 
     {
         
-        const element = inputArray[i];
+        const input = inputArray[i];
         
-        if(element.value === '' || isNaN(element.value))
+        if(input.value === '' || isNaN(input.value))
         {
-            element.classList.add("is-invalid");
-            element.value ="";
+            input.classList.add("is-invalid");
+            input.value ="";
             ParametrosValidos = false;
         }
         
